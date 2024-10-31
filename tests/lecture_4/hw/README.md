@@ -1,3 +1,9 @@
+# График из locustio
+
+![img_1.png](img_1.png)
+# График из grafana
+![img.png](img.png)
+
 # ДЗ
 
 Нужно расписать тесты для demo_service из лекции 4. Сдача на основе процента
