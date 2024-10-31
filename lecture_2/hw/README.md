@@ -2,6 +2,11 @@
 
 ## Задание - REST API (3 балла)
 
+
+<p align="center">
+  <img src="grafana.png" width="500" title="Grafana dashboard" alt="">
+</p>
+
 Реализовать REST + RPC API для выдуманного интернет магазина.
 
 Ресурсы:

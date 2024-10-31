@@ -9,10 +9,13 @@ from fastapi import (
 )
 from typing import Dict, List
 from .schemas import Item, ItemCreate, Cart, CartItem, ItemBase, ItemUpdate
+from prometheus_fastapi_instrumentator import Instrumentator
 import string
 import random
 
+
 app = FastAPI(title="Shop API")
+Instrumentator().instrument(app).expose(app)
 
 items_db: Dict[int, Item] = {}
 carts_db: Dict[int, Cart] = {}
@@ -112,7 +115,7 @@ def get_cart(id: int):
 @app.get("/cart")
 def get_list_carts(
         offset: int = Query(0, ge=0),
-        limit: int = Query(10, gt=0, le=20),
+        limit: int = Query(10, gt=0),
         min_price: float = Query(None, ge=0.0),
         max_price: float = Query(None, ge=0.0),
         min_quantity: int = Query(None, ge=0),
@@ -133,7 +136,7 @@ def get_list_carts(
             continue
         filtered_carts.append(cart)
 
-    return filtered_carts[offset: offset + limit]
+    return filtered_carts[offset : offset + limit]
 
 
 @app.get("/item")
@@ -157,7 +160,7 @@ def get_list_items(
             continue
         filtered_items.append(item)
     #    print(filtered_items)
-    return filtered_items[offset: offset + limit]
+    return filtered_items[offset : offset + limit]
 
 
 @app.post("/cart/{cart_id}/add/{item_id}", response_model=Cart)
