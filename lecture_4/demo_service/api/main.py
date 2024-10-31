@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-
 from lecture_4.demo_service.api import users, utils
-
+from prometheus_fastapi_instrumentator import Instrumentator
 
 def create_app():
     app = FastAPI(
@@ -13,3 +12,7 @@ def create_app():
     app.include_router(users.router)
 
     return app
+
+app = create_app()
+
+Instrumentator().instrument(app).expose(app)

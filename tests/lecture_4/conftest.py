@@ -1,7 +1,9 @@
 import pytest
+from typing import TypeVar
 
+_TVal = TypeVar('_TVal')
 
-async def to_str_async[_TVal](x: _TVal) -> str:
+async def to_str_async(x: _TVal) -> str:
     return str(x)
 
 
